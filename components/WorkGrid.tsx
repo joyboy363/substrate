@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import type { CaseStudyEntry } from "@/lib/kv";
 
 export default function WorkGrid({
+  title,
   caseStudies,
 }: {
+  title: string;
   caseStudies: CaseStudyEntry[];
 }) {
   return (
@@ -19,7 +21,7 @@ export default function WorkGrid({
         className="mb-14"
       >
         <h2 className="text-glow-black font-serif text-4xl text-white md:text-5xl">
-          Selected Work
+          {title}
         </h2>
         <div className="mt-4 h-px w-24 bg-white/30" />
       </motion.div>

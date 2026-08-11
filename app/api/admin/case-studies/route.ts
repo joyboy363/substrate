@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { name, href, result } = await request.json();
+  const { name, href, result, category } = await request.json();
 
   if (
     typeof name !== "string" ||
@@ -29,6 +29,10 @@ export async function POST(request: NextRequest) {
     !result.trim()
   ) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+  }
+
+  if (category !== "work" && category !== "software") {
+    return NextResponse.json({ error: "Invalid category" }, { status: 400 });
   }
 
   try {
@@ -42,6 +46,7 @@ export async function POST(request: NextRequest) {
       name: name.trim(),
       href: href.trim(),
       result: result.trim(),
+      category,
     });
     return NextResponse.json({ caseStudies });
   } catch {

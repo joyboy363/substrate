@@ -2,7 +2,12 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { CaseStudyEntry } from "@/lib/kv";
+import type { CaseStudyCategory, CaseStudyEntry } from "@/lib/kv";
+
+const SECTIONS: { category: CaseStudyCategory; label: string }[] = [
+  { category: "work", label: "Selected Work" },
+  { category: "software", label: "Software Products" },
+];
 
 export default function Dashboard({
   secret,
@@ -63,7 +68,7 @@ export default function Dashboard({
     <div className="min-h-screen bg-background px-6 py-16 text-charcoal md:px-16">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center justify-between">
-          <h1 className="font-serif text-3xl">Selected Work</h1>
+          <h1 className="font-serif text-3xl">Manage Squares</h1>
           <button
             onClick={handleLogout}
             className="text-sm uppercase tracking-[0.1em] text-charcoal/60 underline underline-offset-4"
@@ -76,10 +81,25 @@ export default function Dashboard({
           onSubmit={handleAdd}
           className="mt-10 flex flex-col gap-4 border-b border-charcoal/20 pb-10"
         >
+          <select
+            name="category"
+            required
+            defaultValue=""
+            className="border-b border-charcoal/30 bg-transparent py-2 outline-none focus:border-bronze"
+          >
+            <option value="" disabled>
+              Section
+            </option>
+            {SECTIONS.map((section) => (
+              <option key={section.category} value={section.category}>
+                {section.label}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
             name="name"
-            placeholder="Business name"
+            placeholder="Business / product name"
             required
             className="border-b border-charcoal/30 bg-transparent py-2 outline-none placeholder:text-charcoal/40 focus:border-bronze"
           />
@@ -107,26 +127,48 @@ export default function Dashboard({
           </button>
         </form>
 
-        <ul className="mt-10 flex flex-col gap-6">
-          {caseStudies.map((entry) => (
-            <li
-              key={entry.id}
-              className="flex items-start justify-between gap-4 border-b border-charcoal/10 pb-6"
-            >
-              <div>
-                <h3 className="font-serif text-xl">{entry.name}</h3>
-                <p className="mt-1 text-sm text-charcoal/60">{entry.href}</p>
-                <p className="mt-1 text-charcoal/80">{entry.result}</p>
-              </div>
-              <button
-                onClick={() => handleDelete(entry.id)}
-                className="shrink-0 text-sm uppercase tracking-[0.1em] text-red-700 underline underline-offset-4"
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        {SECTIONS.map((section) => {
+          const entries = caseStudies.filter(
+            (entry) => entry.category === section.category
+          );
+          return (
+            <div key={section.category} className="mt-10">
+              <h2 className="font-serif text-xl text-charcoal/80">
+                {section.label}
+              </h2>
+              {entries.length === 0 ? (
+                <p className="mt-4 text-sm text-charcoal/40">
+                  No squares yet.
+                </p>
+              ) : (
+                <ul className="mt-4 flex flex-col gap-6">
+                  {entries.map((entry) => (
+                    <li
+                      key={entry.id}
+                      className="flex items-start justify-between gap-4 border-b border-charcoal/10 pb-6"
+                    >
+                      <div>
+                        <h3 className="font-serif text-xl">{entry.name}</h3>
+                        <p className="mt-1 text-sm text-charcoal/60">
+                          {entry.href}
+                        </p>
+                        <p className="mt-1 text-charcoal/80">
+                          {entry.result}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleDelete(entry.id)}
+                        className="shrink-0 text-sm uppercase tracking-[0.1em] text-red-700 underline underline-offset-4"
+                      >
+                        Delete
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

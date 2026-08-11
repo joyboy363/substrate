@@ -13,6 +13,7 @@ const TRAIL_MIN_DIST = 8; // px moved before a new trail point is added
 const NAV_LINKS = [
   { label: "Home", href: "#" },
   { label: "Selected Work", href: "#work" },
+  { label: "Software Products", href: "#software" },
   { label: "What We Build", href: "#build" },
   { label: "How We Work", href: "#process" },
 ];

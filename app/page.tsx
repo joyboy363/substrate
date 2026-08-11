@@ -2,6 +2,7 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import IntroOverlay from "@/components/IntroOverlay";
 import Work from "@/components/Work";
+import Software from "@/components/Software";
 import WhatWeBuild from "@/components/WhatWeBuild";
 import Process from "@/components/Process";
 import Contact from "@/components/Contact";
@@ -14,9 +15,11 @@ export default function Home() {
       <Hero />
 
       {/*
-        Sticky background video for Selected Work only. Pinned via `sticky`
-        for the section's own height, then releases naturally at the
-        top/bottom edges once the wrapper scrolls out of view.
+        Sticky background video shared by Selected Work + Software Products.
+        Pinned via `sticky` for their combined height, then releases
+        naturally at the top/bottom edges once the wrapper scrolls out of
+        view — extending this shared background to a new section just means
+        adding it inside the same `-mt-[100vh]` wrapper below.
       */}
       <div className="relative">
         <div className="sticky top-0 -z-10 h-screen w-full">
@@ -37,6 +40,7 @@ export default function Home() {
 
         <div className="-mt-[100vh]">
           <Work />
+          <Software />
         </div>
       </div>
 
