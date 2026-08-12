@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import IntroOverlay from "@/components/IntroOverlay";
+import LazyVideo from "@/components/LazyVideo";
 import Work from "@/components/Work";
 import Software from "@/components/Software";
 import WhatWeBuild from "@/components/WhatWeBuild";
@@ -23,15 +24,11 @@ export default function Home() {
       */}
       <div className="relative">
         <div className="sticky top-0 -z-10 h-screen w-full">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <LazyVideo
+            src="/hands-background.mp4"
+            poster="/hands-background-poster.webp"
             className="h-full w-full object-cover"
-          >
-            <source src="/hands-background.mp4" type="video/mp4" />
-          </video>
+          />
           {/* Softens the hard cut coming down from the Hero section above */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" />
           {/* Softens the hard cut into the starfield section below */}

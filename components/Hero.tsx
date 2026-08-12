@@ -198,6 +198,8 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="auto"
+        poster="/firefly-poster.webp"
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source src="/firefly.mp4" type="video/mp4" />
@@ -205,7 +207,7 @@ export default function Hero() {
 
       <div className="absolute inset-0" style={{ clipPath }}>
         <Image
-          src="/hero-top.png"
+          src="/hero-top.webp"
           alt=""
           fill
           priority

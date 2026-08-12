@@ -38,7 +38,7 @@ export default function Contact() {
         background does.
       */}
       <div className="sticky top-0 -z-10 h-screen w-full">
-        <Image src="/hand-logo.png" alt="" fill priority className="object-cover" />
+        <Image src="/hand-logo.webp" alt="" fill className="object-cover" />
         <div className="absolute inset-0 bg-charcoal/50" />
         {/* Softens the hard cut coming down from the section above */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" />

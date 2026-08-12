@@ -30,6 +30,8 @@ export default function IntroOverlay() {
         autoPlay
         muted
         playsInline
+        preload="auto"
+        poster="/intro-poster.webp"
         onEnded={dismiss}
         className="h-full w-full object-cover"
       >
